@@ -5,13 +5,16 @@ const API_KEY = "AIzaSyA57kxLT6R8rY8GRs0-MD7byYTgb3uGOX0";
 
 
 // PUEDES AGREGAR MÁS CARPETAS AQUÍ
+
 const ROOT_FOLDERS = [
-    { id: "1Sh52AXtwicmQAA6eydV1Wd6-7ScX3Ald", name: "Todos los gustos" },
+      { id: "1Sh52AXtwicmQAA6eydV1Wd6-7ScX3Ald", name: "Todos los gustos" },
       { id: "1ZPC9XNSKRmJy05vyOJ8M0EPd6mxTyJmt", name: "Diciembre" },
       { id: "1W0V97gKVlYGUYYWJyOrNqgzAIHW99Vv5", name: "MusicaDJsBMP" },
-      { id: "1WpoqPYDp1Et2KiU4yQ7fFtqy77MpA4GM", name: "BMP" }
-
-
+      { id: "1WpoqPYDp1Et2KiU4yQ7fFtqy77MpA4GM", name: "BMP" },
+      { id: "12KeZLwGmsUC0hiy6_Y5ldHsX4lLyIxrt", name: "Remix" },
+      { id: "1gKlzBAYoWmI_IkOkGnoAx3UQFgB_84Tu", name: "Remix2" },
+      { id: "1tjm_CdRMehl3Mao2u_seGLrKpVM03TTt", name: "+Music" },
+      { id: "1fz78n-9OPm4uuslBfDXpR7NvkoVtn20B", name: "Series" }
 
       
 ];
