@@ -1,0 +1,91 @@
+:root{
+    --bg:#0a192f;
+    --card:#112240;
+    --accent:#3b3e44;
+    --text:#e6f1ff;
+  }
+  
+  body{
+    margin:0;
+    font-family:system-ui;
+    background:linear-gradient(135deg,#001b44,#c7c7c7);
+    color:var(--text);
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+  }
+  
+  header{
+    padding:15px;
+    text-align:center;
+    background:rgba(0,0,0,.3);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: #0a1a2a;
+
+  }
+  
+  nav button{
+    background:var(--accent);
+    border:none;
+    color:white;
+    padding:8px 12px;
+    border-radius:8px;
+    margin:3px;
+  }
+  
+  main{
+    flex:1;
+    padding:15px;
+  }
+  
+  #list div{
+    background:var(--card);
+    padding:12px;
+    margin:8px 0;
+    border-radius:10px;
+    cursor:pointer;
+  }
+  
+  #list div:hover{
+    background:#527af1;
+  }
+  
+  .player{
+    margin-top:20px;
+    background:rgba(0,0,0,.4);
+    padding:15px;
+
+    position: sticky;
+    top: 80px; /* debajo del header */
+    z-index: 999;
+    background: #0e2238;
+    padding: 10px;
+   
+  }
+
+  #list {
+    margin-top: 20px;
+  }
+  
+  .controls{
+    display:flex;
+    gap:10px;
+    align-items:center;
+  }
+  
+  input[type=range]{
+    width:100%;
+  }
+  
+  footer{
+    text-align:center;
+    padding:10px;
+    background:rgba(0,0,0,.4);
+  }
+  
+  @media(max-width:600px){
+    nav button{width:45%;}
+  }
+  

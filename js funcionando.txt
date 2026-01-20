@@ -1,0 +1,157 @@
+/*************************
+ * CONFIGURACIÓN
+ *************************/
+const API_KEY = "AIzaSyA57kxLT6R8rY8GRs0-MD7byYTgb3uGOX0";
+
+// PUEDES AGREGAR MÁS CARPETAS AQUÍ
+const ROOT_FOLDERS = [
+  { id: "1Sh52AXtwicmQAA6eydV1Wd6-7ScX3Ald", name: "Todos los gustos" },
+  { id: "1ZPC9XNSKRmJy05vyOJ8M0EPd6mxTyJmt", name: "Diciembre" },
+  { id: "1W0V97gKVlYGUYYWJyOrNqgzAIHW99Vv5", name: "MusicaDJsBMP" }
+];
+
+/*************************
+ * ELEMENTOS DOM
+ *************************/
+const list = document.getElementById("list");
+const audio = document.getElementById("audio");
+const now = document.getElementById("now");
+const progress = document.getElementById("progress");
+
+/*************************
+ * ESTADO
+ *************************/
+let songs = [];
+let currentIndex = 0;
+let isPlaying = false;
+
+/*************************
+ * INICIO
+ *************************/
+function home() {
+  list.innerHTML = "<h2>Bienvenido a ENRAZ Music</h2>";
+}
+
+/*************************
+ * MOSTRAR CARPETAS RAÍZ
+ *************************/
+function loadFolders() {
+  list.innerHTML = "<h2>Bibliotecas</h2>";
+
+  ROOT_FOLDERS.forEach(folder => {
+    const div = document.createElement("div");
+    div.textContent = "?? " + folder.name;
+    div.onclick = () => loadPlaylists(folder.id, folder.name);
+    list.appendChild(div);
+  });
+}
+
+/*************************
+ * CARGAR PLAYLISTS
+ *************************/
+function loadPlaylists(folderId, folderName) {
+  fetch(`https://www.googleapis.com/drive/v3/files?q='${folderId}'+in+parents+and+mimeType='application/vnd.google-apps.folder'&key=${API_KEY}`)
+    .then(res => res.json())
+    .then(data => {
+      list.innerHTML = `<h2>${folderName}</h2>`;
+
+      if (!data.files || data.files.length === 0) {
+        list.innerHTML += "<p>No hay carpetas</p>";
+        return;
+      }
+
+      data.files.forEach(folder => {
+        const div = document.createElement("div");
+        div.textContent = "?? " + folder.name;
+        div.onclick = () => loadSongs(folder.id, folder.name);
+        list.appendChild(div);
+      });
+    });
+}
+
+/*************************
+ * CARGAR CANCIONES
+ *************************/
+function loadSongs(folderId, name) {
+  fetch(`https://www.googleapis.com/drive/v3/files?q='${folderId}'+in+parents+and+mimeType contains 'audio'&key=${API_KEY}`)
+    .then(res => res.json())
+    .then(data => {
+      songs = data.files || [];
+      currentIndex = 0;
+
+      list.innerHTML = `<h2>${name}</h2>`;
+
+      songs.forEach((song, index) => {
+        const div = document.createElement("div");
+        div.textContent = "?? " + song.name;
+        div.onclick = () => playSong(index);
+        list.appendChild(div);
+      });
+    });
+}
+
+/*************************
+ * REPRODUCCIÓN
+ *************************/
+function playSong(index) {
+  currentIndex = index;
+  const song = songs[index];
+
+  audio.src = `https://www.googleapis.com/drive/v3/files/${song.id}?alt=media&key=${API_KEY}`;
+  audio.play();
+  isPlaying = true;
+  now.textContent = "? " + song.name;
+}
+
+function togglePlay() {
+  if (!audio.src) return;
+
+  if (isPlaying) {
+    audio.pause();
+    isPlaying = false;
+  } else {
+    audio.play();
+    isPlaying = true;
+  }
+}
+
+/*************************
+ * CONTROLES
+ *************************/
+function next() {
+  if (currentIndex < songs.length - 1) playSong(currentIndex + 1);
+}
+
+function prev() {
+  if (currentIndex > 0) playSong(currentIndex - 1);
+}
+
+audio.addEventListener("ended", next);
+
+/*************************
+ * TIEMPO Y PROGRESO
+ *************************/
+audio.addEventListener("timeupdate", () => {
+  if (!audio.duration) return;
+  progress.value = (audio.currentTime / audio.duration) * 100;
+
+  const current = formatTime(audio.currentTime);
+  const remaining = formatTime(audio.duration - audio.currentTime);
+
+  now.textContent = `${current} / -${remaining}`;
+});
+
+progress.addEventListener("input", () => {
+  audio.currentTime = (progress.value / 100) * audio.duration;
+});
+
+function formatTime(sec) {
+  const m = Math.floor(sec / 60);
+  const s = Math.floor(sec % 60).toString().padStart(2, "0");
+  return `${m}:${s}`;
+}
+
+/*************************
+ * ARRANQUE
+ *************************/
+home();

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>ENRAZ MUSIC</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="style.css">
+<link rel="manifest" href="manifest.json">
+</head>
+
+<body>
+
+<header>
+  <h1>ENRAZ MUSIC</h1>
+  <nav>
+    <button onclick="home()">Reproductor</button>
+    <button onclick="loadFolders()">Carpetas</button>
+    <button onclick="prev()">⏮</button>
+    <button onclick="togglePlay()">▶️</button>
+    <button onclick="next()">⏭</button>
+  </nav>
+
+  <section class="player">
+    <p id="now">Nada reproduciendo</p>
+
+    
+    <input type="range" id="progress" value="0">
+    
+    <div class="controls">
+      <button onclick="shuffle()">🔀</button>
+      <button onclick="repeat()">🔁</button>
+      <input type="range" id="volume" min="0" max="1" step="0.01">
+      <button onclick="fav()">❤️</button>
+    </div>
+
+
+</header>
+
+<main>
+  <section id="list"></section>
+
+
+
+    <audio id="audio"></audio>
+  </section>
+</main>
+
+<footer>
+Derechos Reservados - ENRAZ - 2026
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
