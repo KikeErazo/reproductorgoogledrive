@@ -8,7 +8,8 @@ const API_KEY = "AIzaSyA57kxLT6R8rY8GRs0-MD7byYTgb3uGOX0";
 const ROOT_FOLDERS = [
     { id: "1Sh52AXtwicmQAA6eydV1Wd6-7ScX3Ald", name: "Todos los gustos" },
       { id: "1ZPC9XNSKRmJy05vyOJ8M0EPd6mxTyJmt", name: "Diciembre" },
-      { id: "1W0V97gKVlYGUYYWJyOrNqgzAIHW99Vv5", name: "MusicaDJsBMP" }
+      { id: "1W0V97gKVlYGUYYWJyOrNqgzAIHW99Vv5", name: "MusicaDJsBMP" },
+      { id: "1WpoqPYDp1Et2KiU4yQ7fFtqy77MpA4GM", name: "BMP" }
 
 
 
